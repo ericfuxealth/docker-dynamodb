@@ -1,11 +1,11 @@
 # Create the docker images locally. If a BUILD_NUM is provided, we will also
 # create an image with the tag BUILD_NUM.
 build:
-	docker build -t dwmkerr/dynamodb:latest .
+	docker build -t xealth/docker-dynamo:latest .
 ifndef BUILD_NUM
 	$(warning No build number is defined, skipping build number tag.)
 else
-	docker build -t dwmkerr/dynamodb:$(BUILD_NUM) .	
+	docker build -t xealth/docker-dynamo:$(BUILD_NUM) .
 endif
 
 # Run the tests. These do things like kill containers, so run with caution.
@@ -15,12 +15,12 @@ test: build
 	./test/persistent.test.sh
 
 # Deploy the images to the Docker Hub. Assumes you are logged in!
-deploy: 
-	docker push dwmkerr/dynamodb:latest
+deploy:
+	docker push xealth/docker-dynamo:latest
 ifndef BUILD_NUM
 	$(warning No build number is defined, skipping push of build number tag.)
 else
-	docker push dwmkerr/dynamodb:$(BUILD_NUM)
+	docker push xealth/docker-dynamo:$(BUILD_NUM)
 endif
 
 # Make sure the makefile knows the commands below are commands, not targets.
